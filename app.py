@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 # ---------------- Helper: safe text add (avoids small-float crashes on Cloud) ----------------
 def safe_add_text(msp, content, height, pos, layer="TEXT", align="LEFT"):
     try:
-        return msp.add_text(content, dxfattribs={"height": float(height), "layer": layer}).set_pos(pos, align=align)
+        return msp.add_text(content, dxfattribs={"height": float(height), "layer": layer}).set_placement(pos, align=align)
     except Exception as e:
         # Non-fatal: warn in UI and continue
         st.warning(f"Skipped text (short): {content[:30]}... ({e})")

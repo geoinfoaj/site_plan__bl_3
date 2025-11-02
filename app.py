@@ -22,8 +22,7 @@ import matplotlib.pyplot as plt
 # ---------------- Helper: safe text add (avoids small-float crashes on Cloud) ----------------
 def safe_add_text(msp, content, height, pos, layer="TEXT", align="LEFT"):
     """
-    Safe text placement for ezdxf >=1.3 (Streamlit Cloud compatible)
-    Uses set_align() instead of deprecated set_pos().
+    Safe text creation for all ezdxf >=1.0 (handles missing set_pos / set_align)
     """
     try:
         text = msp.add_text(
@@ -33,12 +32,21 @@ def safe_add_text(msp, content, height, pos, layer="TEXT", align="LEFT"):
                 "layer": layer,
             },
         )
-        # ezdxf >=1.3 uses set_align for positioning
-        text.set_align(pos, align=align)
+        # Directly set insertion coordinates
+        text.dxf.insert = (float(pos[0]), float(pos[1]))
+
+        # Optional alignment (works in modern ezdxf)
+        try:
+            text.set_alignment(align)
+        except Exception:
+            # Ignore if not supported in this ezdxf build
+            pass
+
         return text
     except Exception as e:
         st.warning(f"⚠️ Skipped text '{content[:25]}...': {e}")
         return None
+
 
 
 # ---------------- Map utilities (OSM tile stitching for keyplan/ADLR) ----------------

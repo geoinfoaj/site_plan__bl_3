@@ -243,7 +243,7 @@ if st.button("Generate DXF + PDF"):
         msp.add_lwpolyline(poly_m, dxfattribs={"layer":"ROAD", "closed":True})
         # add label text (height in metres approx)
         tx_m, ty_m = label_mm[0]/1000.0, label_mm[1]/1000.0
-       msp.add_text(f"{side.title()} ({w_m:.1f} m ROAD)", dxfattribs={"height":float(0.0065), "layer":"TEXT"}).set_pos((tx_m, ty_m), align="MIDDLE_CENTER")
+           msp.add_text(f"{side.title()} ({w_m:.1f} m ROAD)", dxfattribs={"height":float(0.0065), "layer":"TEXT"}).set_pos((tx_m, ty_m), align="MIDDLE_CENTER")
 
     # ---------- Site title above site ----------
     msp.add_text(f"SITE (SY.NO. {survey_no})", dxfattribs={"height":0.008, "layer":"TEXT"}).set_pos((site_x_m + site_w_m_draw/2.0, site_y_m + site_h_m_draw + 0.018), align="MIDDLE_CENTER")

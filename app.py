@@ -22,11 +22,19 @@ import matplotlib.pyplot as plt
 # ---------------- Helper: safe text add (avoids small-float crashes on Cloud) ----------------
 def safe_add_text(msp, content, height, pos, layer="TEXT", align="LEFT"):
     try:
-        return msp.add_text(content, dxfattribs={"height": float(height), "layer": layer}).set_placement(pos, align=align)
+        # ezdxf >= 1.3.0 uses insert & align attributes for positioning
+        msp.add_text(
+            content,
+            dxfattribs={
+                "height": float(height),
+                "layer": layer,
+                "insert": (float(pos[0]), float(pos[1])),
+                "align": align,
+            },
+        )
     except Exception as e:
-        # Non-fatal: warn in UI and continue
-        st.warning(f"Skipped text (short): {content[:30]}... ({e})")
-        return None
+        st.warning(f"⚠️ Skipped text '{content[:25]}...': {e}")
+
 
 # ---------------- Map utilities (OSM tile stitching for keyplan/ADLR) ----------------
 def latlon_to_tile_xy(lat_deg, lon_deg, zoom):

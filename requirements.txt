@@ -1,0 +1,7 @@
+echo "streamlit==1.34.0
+ezdxf==1.2.0
+matplotlib==3.8.0
+pillow==10.0.0
+requests==2.31.0
+streamlit-folium==0.12.0
+folium==0.17.0" > requirements.txt

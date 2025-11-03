@@ -99,7 +99,7 @@ def make_keyplan_image(lat, lon, zoom=16, radius_m=200, tiles_radius=1, scale=2)
 st.set_page_config(page_title="Single Site Plan — DXF + PDF", layout="centered")
 st.title("Single Site Plan — DXF + PDF (A3)")
 
-st.markdown("Fill form (English on top, Kannada below). Outputs (PDF/DXF) will be English only.")
+st.markdown("An essential plan required to continue wih your B Khata to - A khata apllication.")
 
 # --- Site details (bilingual)
 st.subheader("Site details / ಸೈಟ್ ವಿವರಗಳು")
